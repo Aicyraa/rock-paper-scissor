@@ -1,0 +1,40 @@
+img {
+  width: 100px;
+  height: auto;
+}
+
+main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.battle__container > div {
+  border: 1px solid black;
+}
+
+.choices {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.score{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+}
+
+.battle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.choices > div {
+    border: 2px solid black;
+    padding: 8px 1rem;
+}
