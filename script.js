@@ -1,13 +1,28 @@
 let game = {
   choices: document.querySelectorAll(".choices"),
+  winner: undefined,
+  usersScore: 0,
+  computerScore: 0,
 };
 
 game.choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
-    const userPick = e.target.dataset.pick;
+    let userPick = e.target.dataset.pick;
     let computerPick = Math.random();
-    let computerAttack =  computerPick < 0.6 ? computerRandomChoice() : counterHuman(userPick);
-        
+    let computerAttack = computerPick <= 0.4 ? computerRandomChoice() : counterHuman(userPick);
+
+    try {
+      game.winner = determineWinner(userPick, computerAttack);
+    } catch (e) {
+      console.log(`Error: ${e}`);
+    }
+
+    console.log(
+      `
+      Random: ${computerPick}
+      User: ${userPick} vs Computer: ${computerAttack} 
+      Winner: ${game.winner[0]} - user: ${game.usersScore} - computer: ${game.computerScore}`
+    );
   });
 });
 
@@ -29,4 +44,18 @@ function counterHuman(userPick) {
   }
 }
 
-function determineWinner(human, computer) {}
+function determineWinner(human, computer) {
+  if (
+    (human == "rock" && computer == "paper") ||
+    (human == "paper" && computer == "scissor") ||
+    (human == "scissor" && computer == "rock")
+  ) {
+    ++game.computerScore;
+    return ["Bob", computer];
+  } else if (human == computer) {
+    return ["Tie", human || computer];
+  } else {
+    ++game.usersScore;
+    return ["You", human];
+  }
+}
