@@ -9,7 +9,7 @@ game.choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     let userPick = e.target.dataset.pick;
     let computerPick = Math.random();
-    let computerAttack = computerPick <= 0.4 ? computerRandomChoice() : counterHuman(userPick);
+    let computerAttack = computerPick < 0.6 ? computerRandomChoice() : counterHuman(userPick);
 
     try {
       game.winner = determineWinner(userPick, computerAttack);
@@ -21,14 +21,15 @@ game.choices.forEach((choice) => {
       `
       Random: ${computerPick}
       User: ${userPick} vs Computer: ${computerAttack} 
-      Winner: ${game.winner[0]} - user: ${game.usersScore} - computer: ${game.computerScore}`
+      Winner: ${game.winner[0]} - user: ${game.usersScore} - computer: ${game.computerScore}
+      `
     );
   });
 });
 
 function computerRandomChoice() {
   const picks = ["rock", "paper", "scissor"];
-  return picks[Math.floor(Math.random() * 3) + 1];
+  return picks[Math.floor(Math.random() * 2  ) + 1];
 }
 
 function counterHuman(userPick) {
