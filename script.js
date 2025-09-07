@@ -3,16 +3,13 @@ let game = {
   user: document.getElementById("human__score"),
   computer: document.getElementById("computer__score"),
   modal: document.querySelector(".modal__container"),
+  images: ['images/rock.png', 'images/paper.png', 'scissor.png'], 
   winner: undefined,
   score: [0, 0],
 
-  manageUI(winner = '') {
-
-    // this.popModal()
-
+  manageUI() {
     this.computer.textContent = this.score[0];
     this.user.textContent = this.score[1];
-
   },
 
   checkScore() {
@@ -25,8 +22,8 @@ let game = {
             return `You win! `;
         }
       }
-      return false;
     }
+    return false;
   },
 
   popModal(txt = " ") {
@@ -60,9 +57,9 @@ game.choices.forEach((choice) => {
       `
     );
 
-    game.manageUI();
     let score = game.checkScore();
-    7;
+    game.manageUI()
+
     if (score) {
       game.popModal(score);
 
@@ -70,7 +67,7 @@ game.choices.forEach((choice) => {
         game.score = [0, 0];
         game.manageUI();
         game.popModal();
-      }, 2000);
+      }, 3000);
     }
   });
 });

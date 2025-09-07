@@ -1,0 +1,35 @@
+/* User */
+.battle > img:nth-child(1) {
+  transform: scaleY(-1) rotate(90deg);
+  animation: animatePick 1s ease-in-out infinite;
+}
+
+/* Bob */
+.battle > img:nth-child(2) {
+  transform: rotate(-90deg);
+  animation: animatePickOpponent 1s ease-in-out infinite;
+}
+
+/* User hand animation */
+@keyframes animatePick {
+  0%,
+  100% {
+    transform: scaleY(-1) rotate(90deg) translateY(0);
+  }
+  50% {
+    transform: scaleY(-1) rotate(120deg) translateY(-20px);
+  }
+}
+
+/* Opponent hand animation */
+@keyframes animatePickOpponent {
+  0%,
+  100% {
+    transform: rotate(-90deg) translateY(0);
+  }
+  50% {
+    transform: rotate(-50deg) translateY(-20px);
+  }
+}
+
+
