@@ -1,9 +1,10 @@
 let game = {
   choices: document.querySelectorAll(".choices"),
+  battle: document.querySelector(".battle"),
   user: document.getElementById("human__score"),
   computer: document.getElementById("computer__score"),
   modal: document.querySelector(".modal__container"),
-  images: ['images/rock.png', 'images/paper.png', 'scissor.png'], 
+  images: ["images/rock.png", "images/paper.png", "images/scissor.png"],
   winner: undefined,
   score: [0, 0],
 
@@ -34,6 +35,20 @@ let game = {
     this.modal.classList.toggle("show");
     this.modal.querySelector("#text").textContent = txt;
   },
+
+  changeImage(human, computer) {
+    let img = this.battle.children;
+
+    for (let i = 0; i < this.images.length; i++) {
+      if (this.images[i].includes(human)) {
+        img[0].src = this.images[i];
+      }
+
+      if (this.images[i].includes(computer)) {
+        img[1].src = this.images[i];
+      }
+    }
+  },
 };
 
 game.choices.forEach((choice) => {
@@ -42,6 +57,8 @@ game.choices.forEach((choice) => {
     let computerPick = Math.random();
     let computerAttack =
       computerPick < 0.5 ? computerRandomChoice() : counterHuman(userPick);
+
+    game.changeImage(userPick, computerAttack);
 
     try {
       game.winner = determineWinner(userPick, computerAttack);
@@ -58,7 +75,7 @@ game.choices.forEach((choice) => {
     );
 
     let score = game.checkScore();
-    game.manageUI()
+    game.manageUI();
 
     if (score) {
       game.popModal(score);
@@ -105,3 +122,4 @@ function determineWinner(human, computer) {
     return "You";
   }
 }
+
