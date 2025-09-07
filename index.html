@@ -8,27 +8,32 @@
     <title>Rock | Paper | Scissor</title>
   </head>
   <body>
-    
     <main>
       <div class="modal__container">
-        <p id="text"> Computer wins</p>
+        <p id="text"> </p>
       </div>
+
       <div class="battle__container">
+        <!-- Scoreboard -->
         <div class="score">
-          <div class="">You <span id="human__score"> 0</span></div>
-          <div class="">Bob <span id="computer__score">0</span></div>
+          <div>You <span id="human__score">0</span></div>
+          <div>Bob <span id="computer__score">0</span></div>
         </div>
+
+        <!-- Battle images -->
         <div class="battle">
-          <img src="images/rock.png" alt="" />
-          <img src="images/rock.png" alt="" />
+          <img src="images/rock.png" alt="Your hand" />
+          <img src="images/rock.png" alt="Bob hand" />
         </div>
+
+        <!-- Choices -->
         <div class="choices">
-          <div class="choice rock" data-pick="rock">Rock</div>
-          <div class="choice paper" data-pick="paper">Paper</div>
-          <div class="choice scissor" data-pick="scissor">Scissor</div>
+          <div class="choice rock" data-pick="rock">✊ Rock</div>
+          <div class="choice paper" data-pick="paper">✋ Paper</div>
+          <div class="choice scissor" data-pick="scissor">✌️ Scissor</div>
         </div>
       </div>
     </main>
+    <script src="script.js"></script>
   </body>
-  <script src="script.js"></script>
 </html>

@@ -9,7 +9,6 @@
 }
 
 /* animation class */
-
 .battle > img:nth-child(1).active {
   animation: animatePick 1.8s ease-in-out infinite;
 }
@@ -28,7 +27,7 @@
   80% {
     transform: scaleY(-1) rotate(130deg) translateY(-10px);
     opacity: 0.8;
-    filter: blur(8px);
+    filter: blur(5px);
   }
   100% {
     transform: scaleY(-1) rotate(90deg) translateY(0);
@@ -47,7 +46,7 @@
   80% {
     transform: rotate(-50deg) translateY(-10px);
     opacity: 0.8;
-    filter: blur(8px);
+    filter: blur(5px);
   }
   100% {
     transform: rotate(-90deg) translateY(0);
