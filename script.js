@@ -1,15 +1,50 @@
 let game = {
   choices: document.querySelectorAll(".choices"),
+  user: document.getElementById("human__score"),
+  computer: document.getElementById("computer__score"),
+  modal: document.querySelector(".modal__container"),
   winner: undefined,
-  usersScore: 0,
-  computerScore: 0,
+  score: [0, 0],
+
+  manageUI(winner = '') {
+
+    // this.popModal()
+
+    this.computer.textContent = this.score[0];
+    this.user.textContent = this.score[1];
+
+  },
+
+  checkScore() {
+    for (let i = 0; i < this.score.length; i++) {
+      if (this.score[i] == 3) {
+        switch (i) {
+          case 0:
+            return `Bob win! `;
+          case 1:
+            return `You win! `;
+        }
+      }
+      return false;
+    }
+  },
+
+  popModal(txt = " ") {
+    this.choices.forEach((choice) => {
+      choice.classList.toggle("disable");
+    });
+
+    this.modal.classList.toggle("show");
+    this.modal.querySelector("#text").textContent = txt;
+  },
 };
 
 game.choices.forEach((choice) => {
   choice.addEventListener("click", (e) => {
     let userPick = e.target.dataset.pick;
     let computerPick = Math.random();
-    let computerAttack = computerPick < 0.6 ? computerRandomChoice() : counterHuman(userPick);
+    let computerAttack =
+      computerPick < 0.5 ? computerRandomChoice() : counterHuman(userPick);
 
     try {
       game.winner = determineWinner(userPick, computerAttack);
@@ -20,16 +55,29 @@ game.choices.forEach((choice) => {
     console.log(
       `
       Random: ${computerPick}
-      User: ${userPick} vs Computer: ${computerAttack} 
-      Winner: ${game.winner[0]} - user: ${game.usersScore} - computer: ${game.computerScore}
+      User: ${userPick} vs Bob: ${computerAttack} 
+      Winner: ${game.winner} - user: ${game.score[1]} - Bob: ${game.score[0]}
       `
     );
+
+    game.manageUI();
+    let score = game.checkScore();
+    7;
+    if (score) {
+      game.popModal(score);
+
+      setTimeout(() => {
+        game.score = [0, 0];
+        game.manageUI();
+        game.popModal();
+      }, 2000);
+    }
   });
 });
 
 function computerRandomChoice() {
   const picks = ["rock", "paper", "scissor"];
-  return picks[Math.floor(Math.random() * 2  ) + 1];
+  return picks[Math.floor(Math.random() * picks.length)];
 }
 
 function counterHuman(userPick) {
@@ -51,12 +99,12 @@ function determineWinner(human, computer) {
     (human == "paper" && computer == "scissor") ||
     (human == "scissor" && computer == "rock")
   ) {
-    ++game.computerScore;
-    return ["Bob", computer];
+    ++game.score[0];
+    return "Bob";
   } else if (human == computer) {
-    return ["Tie", human || computer];
+    return "Tie";
   } else {
-    ++game.usersScore;
-    return ["You", human];
+    ++game.score[1];
+    return "You";
   }
 }
