@@ -1,35 +1,57 @@
 /* User */
 .battle > img:nth-child(1) {
   transform: scaleY(-1) rotate(90deg);
-  animation: animatePick 1s ease-in-out infinite;
 }
 
 /* Bob */
 .battle > img:nth-child(2) {
   transform: rotate(-90deg);
-  animation: animatePickOpponent 1s ease-in-out infinite;
+}
+
+/* animation class */
+
+.battle > img:nth-child(1).active {
+  animation: animatePick 1.8s ease-in-out infinite;
+}
+
+.battle > img:nth-child(2).active {
+  animation: animatePickOpponent 1.8s ease-in-out infinite;
 }
 
 /* User hand animation */
 @keyframes animatePick {
-  0%,
+  0% {
+    transform: scaleY(-1) rotate(90deg) translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+  80% {
+    transform: scaleY(-1) rotate(130deg) translateY(-10px);
+    opacity: 0.8;
+    filter: blur(8px);
+  }
   100% {
     transform: scaleY(-1) rotate(90deg) translateY(0);
-  }
-  50% {
-    transform: scaleY(-1) rotate(120deg) translateY(-20px);
+    opacity: 1;
+    filter: blur(0);
   }
 }
 
 /* Opponent hand animation */
 @keyframes animatePickOpponent {
-  0%,
+  0% {
+    transform: rotate(-90deg) translateY(0);
+    opacity: 1;
+    filter: blur(0);
+  }
+  80% {
+    transform: rotate(-50deg) translateY(-10px);
+    opacity: 0.8;
+    filter: blur(8px);
+  }
   100% {
     transform: rotate(-90deg) translateY(0);
-  }
-  50% {
-    transform: rotate(-50deg) translateY(-20px);
+    opacity: 1;
+    filter: blur(0);
   }
 }
-
-

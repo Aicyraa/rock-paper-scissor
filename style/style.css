@@ -56,9 +56,9 @@ main {
 
 .score {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 3rem;
+  width: 450px;
 }
 
 .score > div {
@@ -87,5 +87,6 @@ main {
 
 .choice.disable{
   pointer-events: none;
+  opacity: 0.8;
 }
 /*  pick animation */

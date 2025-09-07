@@ -1,16 +1,29 @@
 let game = {
-  choices: document.querySelectorAll(".choices"),
+  choices: document.querySelectorAll(".choice"),
+  modal: document.querySelector(".modal__container"),
   battle: document.querySelector(".battle"),
   user: document.getElementById("human__score"),
   computer: document.getElementById("computer__score"),
-  modal: document.querySelector(".modal__container"),
   images: ["images/rock.png", "images/paper.png", "images/scissor.png"],
   winner: undefined,
   score: [0, 0],
 
   manageUI() {
-    this.computer.textContent = this.score[0];
-    this.user.textContent = this.score[1];
+    setTimeout(() => {
+      this.computer.textContent = this.score[0];
+      this.user.textContent = this.score[1];
+    }, 2000);
+  },
+
+  popModal(txt = " ") {
+    this.choices.forEach((choice) => {
+      choice.classList.toggle("disable");
+    });
+
+    setTimeout(() => {
+      this.modal.classList.toggle("show");
+      this.modal.querySelector("#text").textContent = txt;
+    }, 2200);
   },
 
   checkScore() {
@@ -27,27 +40,29 @@ let game = {
     return false;
   },
 
-  popModal(txt = " ") {
-    this.choices.forEach((choice) => {
-      choice.classList.toggle("disable");
-    });
-
-    this.modal.classList.toggle("show");
-    this.modal.querySelector("#text").textContent = txt;
-  },
-
   changeImage(human, computer) {
     let img = this.battle.children;
 
     for (let i = 0; i < this.images.length; i++) {
       if (this.images[i].includes(human)) {
-        img[0].src = this.images[i];
+        this.animate(img[0], this.images[i]);
       }
 
       if (this.images[i].includes(computer)) {
-        img[1].src = this.images[i];
+        this.animate(img[1], this.images[i]);
       }
     }
+  },
+
+  animate(pick, image) {
+    pick.classList.add("active");
+    setTimeout(() => {
+      pick.src = image;
+    }, 1580);
+
+    setTimeout(() => {
+      pick.classList.remove("active");
+    }, 1800);
   },
 };
 
@@ -74,17 +89,19 @@ game.choices.forEach((choice) => {
       `
     );
 
-    let score = game.checkScore();
+    let whoWon = game.checkScore();
     game.manageUI();
 
-    if (score) {
-      game.popModal(score);
+    if (whoWon) {
+      game.popModal(whoWon);
 
       setTimeout(() => {
         game.score = [0, 0];
         game.manageUI();
         game.popModal();
       }, 3000);
+    } else {
+      disableBtn();
     }
   });
 });
@@ -123,3 +140,14 @@ function determineWinner(human, computer) {
   }
 }
 
+function disableBtn() {
+  game.choices.forEach((choice) => {
+    choice.classList.add("disable");
+  });
+
+  setTimeout(() => {
+    game.choices.forEach((choice) => {
+      choice.classList.remove("disable");
+    });
+  }, 2000);
+}
